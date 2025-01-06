@@ -36,6 +36,21 @@ app.delete('/delete/:id',async(req,res)=>{
     res.send({massege:"user not exist"})
   }
 })
+app.put('/update/:id',async (req,res)=>{
+  const itemId=req.params.id
+  const updatedId=req.body
+  console.log(itemId);
+  console.log(updatedId);
+  const userUpdate=await userModel.findByIdAndUpdate({_id:itemId},updatedId,{new:true})
+  if(userUpdate){
+    res.send({message:"User Updated Successfully"})
+  }
+  else{
+    res.send({message:"User not updated Successfully"})
+  }
+})
+
+
 app.listen(4000, () => {
   console.log("Server is running... ");
 });
